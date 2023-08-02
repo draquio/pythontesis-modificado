@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} {{video['title']}} {% endblock %}
+{% block content %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<form method="POST">
+    <iframe style="width: 100%; height: 570px;" src="https://www.youtube.com/embed/{{id}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </br>
+    <p><b>Canal:</b> {{video['channelTitle']}}</p> 
+    <p><b>Fecha de publicación: </b>{{ video['publishedAt'] }}</p>
+    <p><b>Descripción del video:</b></p>
+    {% if video['description'] == '' %}
+        <p>Este video no tiene descripción.</p>
+    {%else%}
+        <p>{{video['description']}}</p>
+    {% endif %}
+    {% if validacion == 1 %}
+    <div class="form-group mt-3" style="text-align: right;">
+        <button type="submit" onclick="return confirm('Estas seguro de querer guardar esta receta?')" class="btn btn-azul"><i class="fas fa-save"></i>  Guardar Receta</button>
+
+    </div>
+</form>
+    {% else %}
+</form>
+    <form action="{{ url_for('receta.delete', idv=id) }}" method="POST">
+        <div class="form-group mt-3" style="text-align: right;">
+            <button type="submit" onclick="return confirm('Estas seguro de querer eliminar?')" class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar Receta</button>
+        </div>
+    </form>
+    {% endif %}
+
+{% endblock %}

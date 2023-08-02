@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} Editar Usuario {% endblock %}
+{% block content %}
+
+    <a class="btn-azul boton_derecho_superior" href="{{ url_for('auth.users') }}"><i class="fas fa-backward"></i> Atrás</a>
+    <form method="POST">
+        <div id="loginStatus"></div>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-user"></i></div></div>
+            <input type="text" class="form-control" id="username" value="{{ request.form['username'] or user['username'] }}" name="username" placeholder="Nombre de Usuario" required="required">
+        </div>
+    </br>
+        <!-- <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-lock"></i></div></div>
+            <input type="password" class="form-control" value="{{ request.form['password'] or user['password'] }}" id="password" name="password" placeholder="Contraseña" required="required">
+        </div>
+    </br> -->
+    <div class="form-group">
+        <label for="input-group mb-2 mr-sm-2">Selecionar Rol</label>
+        <select class="form-control" name="idrol" id="idrol">
+        {% for rol in roles %}
+        {% if rol['id'] == user['idrol'] %}
+            <option selected value="{{ rol['id'] }}">{{ rol['nombrerol'] }}</option>
+        {% else %}
+            <option value="{{ rol['id'] }}">{{ rol['nombrerol'] }}</option>
+        {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-azul"><i class="fas fa-save"></i>  Editar Usuario</button>
+        </div>
+    </form>
+        <div class="form-group mt-3" style="text-align: right;">
+            <form action="{{ url_for('auth.updatepassword', id=user['id']) }}" method="POST">
+                <a href="{{ url_for('auth.updatepassword', id=user['id']) }}" class="btn btn-verde"><i class="fas fa-key"></i> Modificar contraseña</a>
+                <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"
+                        class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar usuario</button>
+            </form>
+        </div>
+        
+        
+    
+{% endblock %}

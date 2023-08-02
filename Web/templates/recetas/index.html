@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Recetas {% endblock %}
+{% block content %}
+<a class="btn-amarillo boton_derecho_superior" href="{{ url_for('receta.guardadas') }}"><i class="fas fa-server"></i> Guardadas</a>
+<form method="POST" action="buscar">
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend"><div class="input-group-text"><i class="fas fa-utensils"></i></div></div>
+        <input style="width: 65%;" type="text" class="form-control" id="receta" name="receta" placeholder="Nombre de receta" required="required">       
+        <select class="form-control" name="relevancia" id="relevancia">
+          <option value="relevance">Relevancia</option>
+          <option value="viewCount">Mas vistos</option>
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-azul"><i class="fas fa-search-plus"></i>  Buscar</button>
+    </div>
+</form>
+
+
+
+
+	{% for v in videos %}
+	<div class="card" style="width: 33%; display: inline-block; margin:15px 0">
+		<img class="card-img-top" src="{{ v['snippet']['thumbnails']['high']['url'] }}" alt="{{v['snippet']['title']}}">
+		<div class="card-body">
+		  <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" class="card-title"><b style="font-size: 20px;">{{ v['snippet']['title'] }}</b></p>
+		  <a href="{{ url_for('receta.ver_video', id=v['id']['videoId']) }}" class="btn btn-azul"><i class="fas fa-photo-video"></i> Ver receta</a>
+		</div>
+    
+	  </div>
+	{% endfor %}
+
+{% endblock %}

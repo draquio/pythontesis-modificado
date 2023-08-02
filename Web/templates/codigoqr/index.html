@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Códigos QR {% endblock %}
+{% block content %}
+<a class="btn-amarillo boton_derecho_superior" href="{{ url_for('codigoqr.create') }}"><i class="fas fa-plus"></i> Nuevo</a>    
+
+<div class="lista" id="lista">
+    <div class="bloque_lista ">
+        <div class="bloque_lista_dentro bloque_1">
+                <img style="width: 50%;" src="https://icons.iconarchive.com/icons/icons8/windows-8/256/Ecommerce-Qr-Code-icon.png">
+        </div>
+        <div class="bloque_lista_dentro bloque_2">
+            <p class="label">Nombre:</p>
+            <p>Este es el nombre</p>
+        </div>
+        <div class="bloque_lista_dentro bloque_3">
+            <p class="label">Detalles adicionales:</p>
+            <p maxlength="11">asdasdasdasdasdasd</p>
+        </div>
+        <div class="bloque_lista_dentro bloque_4">
+            <a class="btn btn-amarillo" href="#"><i class="fas fa-edit"></i> Editar</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

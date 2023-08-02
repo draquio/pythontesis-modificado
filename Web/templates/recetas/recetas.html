@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+{% block title %} Recetas {% endblock %}
+{% block content %}
+<a class="btn-azul boton_derecho_superior" href="{{ url_for('receta.index') }}"><i class="fas fa-backward"></i> Atrás</a>
+	{% for r in recetas %}
+	<div class="card cardAnimacion animate__animated animate__bounceInRight" style="width: 32%; display: inline-block; margin:15px 0">
+		<img class="card-img-top" src="{{ r['thumbnail'] }}" alt="{{r['title']}}">
+		<div class="card-body">
+		  <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" class="card-title"><b style="font-size: 20px;">{{ r['title'] }}</b></p>
+		  <a href="{{ url_for('receta.ver_video', id=r['id_v']) }}" class="btn btn-azul"><i class="fas fa-photo-video"></i> Ver receta</a>
+		</div>
+    
+	  </div>
+	  
+	{% endfor %}
+	
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %} Almacen {% endblock %}
+{% block content %}
+{% if g.user.privilegio == 1 %}
+<a class="btn-amarillo boton_derecho_superior" href="{{ url_for('almacen.create') }}"><i class="fas fa-plus"></i>
+    Nuevo</a>
+{% endif %}
+<!-- <div style="width: 100%; text-align: center;">
+    <a class="btn btn-azul" href="#"><i class="fas fa-plus"></i> Registrar almacen de carne</a>
+    <a class="btn btn-verde" href="{{ url_for('almacen.create') }}"><i class="fas fa-plus"></i> Lista almacenes</a>
+  </div>    -->
+
+<h4 style="text-align: center;" class="animate__animated animate__bounceInRight">Almacenes creados</h4>
+<div class="lista animate__animated animate__bounceInRight" id="lista2">
+    {% for a in almacenes %}
+    <div class="bloque_lista ">
+        <div class="bloque_lista_dentro bloque_1">
+            <img style="width: 50%;" src="../static/imgqr/{{ a['img'] }}">
+        </div>
+        <div style="width: 40%;" class="bloque_lista_dentro bloque_2">
+            <p class="label">Nombre de almacén:</p>
+            <p>{{ a['nombre'] }}</p>
+        </div>
+        <div style="width: 20%;" class="bloque_lista_dentro bloque_3">
+            <p class="label">Fecha creación:</p>
+            <p maxlength="11">{{ a['date'].strftime("%d-%m-%Y %H:%M %p") }}</p>
+        </div>
+        {% if g.user.privilegio == 1 %}
+        <div style="width: 20%;" class="bloque_lista_dentro bloque_4">
+            <a class="btn btn-verde" href="{{ url_for('almacen.update', id=a['id']) }}"><i class="fas fa-edit"></i></a>
+            <a class="btn btn-amarillo" href="{{ url_for('almacen.imprimir', id=a['id']) }}"><i
+                    class="fas fa-print"></i></a>
+            <button type="submit" onclick="return confirm('Estas seguro de activar este corte de carne?')"
+                class="btn btn-rojo texto-blanco"><i class="fas fa-power-off"></i></button>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<hr>
+<div class="title animate__animated animate__bounceInLeft">Almacenes con carne</div>
+<br>
+
+<div class="lista animate__animated animate__bounceInLeft" id="lista3">
+    {% for a in almacenes_ocupados %}
+    <div class="bloque_lista">
+        <div class="bloque_lista_dentro bloque_1">
+            <img style="width: 50%;" src="../static/imgqr/{{ a['img'] }}">
+        </div>
+        <div style="width: 15%;" class="bloque_lista_dentro bloque_2">
+            <p class="label">Almacen:</p>
+            <p>{{ a['nombre'] }}</p>
+        </div>
+        <div style="width: 25%;" class="bloque_lista_dentro bloque_3">
+            <p class="label">Fecha de guardado:</p>
+            <p maxlength="11">{{ a['date'] }}</p>
+        </div>
+        <div style="width: 15%;" class="bloque_lista_dentro bloque_3">
+            <p class="label">Cantidad:</p>
+            <p maxlength="11">{{ a['cantidad'] }} Kg.</p>
+        </div>
+        <div style="width: 15%;" class="bloque_lista_dentro bloque_3">
+            <p class="label">Tipo:</p>
+            {% if a['idtipocarne'] == 1 %}
+            <img style="width: 25%;" src="../static/img/vaca.png">
+            {% elif a['idtipocarne'] == 2 %}
+            <img style="width: 25%;" src="../static/img/cerdo.png">
+            {% else %}
+            <img style="width: 25%;" src="../static/img/pollo.png">
+            {% endif %}
+        </div>
+        {% if g.user.privilegio == 1 %}
+        <div style="width: 10%; margin-top: -7px" class="bloque_lista_dentro bloque_4">
+            <!-- <a class="btn btn-rojo" href="#"><i class="fas fa-trash-alt"></i></a> -->
+            <form action="{{ url_for('almacen.deleteAlmacenGuardado', id=a['idgeneral']) }}" method="POST">
+                <div class="form-group mt-3" style="text-align: right;">
+                    <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"
+                        class="btn btn-rojo texto-blanco"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<br>
+<hr>
+
+Vamos a mostrar los almacenes que tienen carne en su interior con la cantidad de carne y tipo de carne (ademas pueden
+tener varias inserciones, asi que almacen calculamos por fecha)
+Luego haremos el eliminar e imprimir de los almacenes
+Agregar predicciones por Vaca, pollo, cerdo
+
+
+tenemos que mostrar las ultimas inserciones pero si hay dos inserciones para un almacen el mismo dia, mostrar ambas
+inserciones
+
+{% endblock %}

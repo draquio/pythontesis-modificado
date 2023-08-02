@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Registro {% endblock %}
+
+
+{% block content %}
+
+    <a class="btn-azul boton_derecho_superior" href="{{ url_for('auth.users') }}"><i class="fas fa-backward"></i> Atrás</a>
+    <form method="POST">
+        <div id="loginStatus"></div>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-user"></i></div></div>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario" required="required">
+        </div>
+    </br>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-lock"></i></div></div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required="required">
+        </div>
+    </br>
+    <div class="form-group">
+        <label for="input-group mb-2 mr-sm-2">Selecionar Rol</label>
+        <select class="form-control" name="idrol" id="idrol">
+        {% for rol in roles %}
+          <option value="{{ rol['id'] }}">{{ rol['nombrerol'] }}</option>
+        {% endfor %}
+        </select>
+      </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-azul"><i class="fas fa-save"></i>  Crear Usuario</button>
+        </div>
+    </form>
+    
+        
+    
+{% endblock %}

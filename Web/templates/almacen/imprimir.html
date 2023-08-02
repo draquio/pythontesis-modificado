@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Imprimir Almacen {% endblock %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.0/jQuery.print.min.js"
+    integrity="sha512-i8ERcP8p05PTFQr/s0AZJEtUwLBl18SKlTOZTH0yK5jVU0qL8AIQYbbG5LU+68bdmEqJ6ltBRtCxnmybTbIYpw=="
+    crossorigin="anonymous"></script>
+<a class="btn-azul boton_derecho_superior" href="{{ url_for('almacen.index') }}"><i
+        class="fas fa-backward"></i>Atrás</a>
+<div class="form-row">
+    <div id="imprimible" style="text-align: center; width: 100%;">
+        <br>
+        <h3>{{ almacen['nombre'] }}</h3>
+        <img style="width:50%" src="../../static/imgqr/{{ almacen['img'] }}">
+    </div>
+    <button class="btn btn-azul" id="imprimir"><i class="fas fa-print"></i> Impirmir</button>
+</div>
+</div>
+<script>
+    $.print('#imprimible');
+    $('#imprimir').click(function(){
+        $.print('#imprimible');
+    })
+</script>
+
+{% endblock %}

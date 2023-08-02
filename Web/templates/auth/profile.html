@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Perfil {% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email">Nombre de Usuario</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend"><div class="input-group-text"><i class="fas fa-user"></i></div></div>
+          <input type="text" disabled class="form-control" id="username" name="username" value="{{user['username']}}">
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password">Rol</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend"><div class="input-group-text"><i class="fas fa-tools"></i></div></div>
+          <input type="text" class="form-control" value="{{user['rol']}}" disabled id="rol" name="rol">
+        </div>
+      </div>
+      </div>
+  </form>
+  {% endblock %}

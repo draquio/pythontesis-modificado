@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Historial {% endblock %}
+{% block content %}
+<a class="btn-azul boton_derecho_superior" href="{{ url_for('index.historial') }}"><i class="fas fa-backward"></i> Atrás</a>
+
+    <form method="post">
+        <label>Cantidad</label>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-utensils"></i></div></div>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" required="required" value="{{carne['cantidad']}}">
+        </div>
+    </br>
+        <label>Tipo de Carne:</label>
+        <select class="form-control" name="tipocarne" id="tipocarne">
+            {% for t in tipo %}
+                {% if t['id'] == carne['idtipocarne'] %}
+                    <option selected value="{{t['id']}}">Carne de {{t['nombre']}}</option>
+                {% else %}
+                    <option value="{{t['id']}}">Carne de {{t['nombre']}}</option>
+                {% endif %}
+            {% endfor %}
+          </select>
+        </br>
+        <label>Tipo:</label>
+        <select class="form-control" name="tipo" id="tipo">
+            {% if carne['tipo'] == 0 %}
+                <option selected value="0">He comprado carne</option>
+                <option value="1">He ocupado/gastado carne</option>
+            {% else %}
+            <option value="0">He comprado carne</option>
+            <option selected value="1">He ocupado/gastado carne</option>
+            {% endif %}
+          </select>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-azul"><i class="fas fa-save"></i>  Guardar</button>
+        </div>
+    </form>
+    <form action="{{ url_for('index.delete', id=carne['id']) }}" method="POST">
+        <div class="form-group mt-3" style="text-align: right;">
+            <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')" class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar</button>
+        </div>
+    </form>
+{% endblock %}

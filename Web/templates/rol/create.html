@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Nuevo Rol {% endblock %}
+
+{% block content %}
+<a class="btn-azul boton_derecho_superior" href="{{ url_for('rol.index') }}"><i class="fas fa-backward"></i> Atrás</a>
+<form method="post">
+    <label for="nombrerol">Nombre de Rol</label>
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-user"></i></div>
+        </div>
+        <input type="text" class="form-control" id="nombrerol" name="nombrerol" placeholder="Nombre de Rol"
+            required="required">
+    </div>
+    </br>
+    <label for="descripcion">Descripción de Rol</label>
+    <div class="input-group mb-2 mr-sm-2">
+        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción de Rol"
+            required="required" rows="3"></textarea>
+    </div>
+    <br>
+    <label for="Privilegios">Privilegios</label>
+    <div class="input-group mb-2 mr-sm-2">
+        <select class="form-control" name="privilegio" id="privilegio">
+            <option value="1">Administrador</option>
+            <option value="2">Asistente</option>
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-azul"><i class="fas fa-save"></i> Guardar</button>
+    </div>
+
+
+</form>
+{% endblock %}

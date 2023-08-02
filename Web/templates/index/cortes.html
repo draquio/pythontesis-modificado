@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} Cortes {% endblock %}
+{% block content %}
+{% if g.user.privilegio == 1 %}
+<a class="btn-amarillo boton_derecho_superior" href="{{ url_for('index.crear_corte') }}"><i class="fas fa-plus"></i> Nuevo</a>  
+{% endif %}
+<h4 style="text-align: center;">Cortes de Carne</h4>
+    {% for c in cortes %}
+    <div class="bloque_lista lista animate__animated animate__bounceInRight">
+        <div style="width: 70%; margin-top:15px" class="bloque_lista_dentro bloque_2">
+            <p class="label">Nombre:</p>
+            <p>{{ c['nombre'] }}</p>
+        </div>
+        <div style="width: 20%;" class="bloque_lista_dentro bloque_4">
+            {% if g.user.privilegio == 1 %}
+            <form action="{{ url_for('index.cambiar_estado', id=c['id']) }}" method="POST">
+                <a class="btn btn-amarillo" href="{{ url_for('index.update_cortes', id=c['id']) }}"><i
+                        class="fas fa-edit"></i></a>
+                <button type="submit" onclick="return confirm('Estas seguro de desactivar este corte de carne?')"
+                    class="btn btn-rojo texto-blanco"><i class="fas fa-power-off"></i></button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+   
+    {% if cortes_desactivados %}
+    <br><br>
+    <h4 style="text-align: center;">Cortes de Carne desactivados</h4>
+    {% endif %}
+    {% for c in cortes_desactivados %}
+    <div class="bloque_lista lista animate__animated animate__bounceInLeft">
+        <div style="width: 70%; margin-top:15px" class="bloque_lista_dentro bloque_2">
+            <p class="label">Nombre:</p>
+            <p>{{ c['nombre'] }}</p>
+        </div>
+        <div style="width: 20%;" class="bloque_lista_dentro bloque_4">
+            <form action="{{ url_for('index.cambiar_estado', id=c['id']) }}" method="POST">
+                <a class="btn btn-amarillo" href="{{ url_for('index.update_cortes', id=c['id']) }}"><i
+                        class="fas fa-edit"></i></a>
+                <button type="submit" onclick="return confirm('Estas seguro de activar este corte de carne?')"
+                    class="btn btn-verde texto-blanco"><i class="fas fa-power-off"></i></button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

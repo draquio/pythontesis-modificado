@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<title>{% block title %} {% endblock %} - El Rodeo</title>
+<header>
+
+
+  <!----------- Mi JS y CSS  ------------->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  
+  <!----------- Bootstrap  ------------->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!----------- Fuentes  ------------->
+  <script src="https://kit.fontawesome.com/d4224b7569.js" crossorigin="anonymous"></script>
+  <!----------- Charts  ------------->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script> -->
+
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bottom-border">
+	<div class="container">
+      {% if g.user %}
+        <a class="navbar-brand" href="/home">El Rodeo</a>
+      {% else %}
+        <a class="navbar-brand" href="/">El Rodeo</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
+        	<div class="navbar-collapse collapse" id="navbar">
+          	<ul class="navbar-nav ml-auto">
+              <li>
+                <button class="switch" id="switch">
+                  <span><i class="fas fa-sun"></i></span>
+                  <span><i class="fas fa-moon"></i></span>
+                </button>
+              </li>
+        {% if g.user %}
+        {% if g.user.privilegio == 1 %}
+				<li class="nav-item">
+				  <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('rol.index') }}"><i class="fas fa-tools"></i> Roles</a>
+        </li>
+        <li class="nav-item">
+				  <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('auth.users') }}"><i class="fas fa-users"></i> Usuarios</a>
+        </li>
+
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('receta.index') }}"><i class="fas fa-book"></i> Recetas</a>
+        </li>
+        <li class="nav-item">
+				  <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('auth.profile') }}"><i class="fas fa-user"></i> Perfil</a>
+        </li>
+				<li class="nav-item">
+				  <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </li>
+        
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('index.index') }}"><i class="fas fa-address-book"></i> Index</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-nav-home btn btn-verde" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+        {% endif %}
+		 	</ul>
+       	</div>
+    </div>
+</nav>
+
+<section class="content">
+  
+    <header>
+        {% block header %} {% endblock %}
+    </header>
+    
+
+    <main role="main" class="container">
+        <div class="row">
+          <div class="col-12">
+              <div class="my-3 p-3 bg-white rounded box-shadow box-style">
+                {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert"><b>{{ message }}</b>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    </div>
+                {% endfor %}
+                
+                  <div id="blue-box">
+                      <div class="title">
+                        {{ titulo }}
+                      </div>
+                      <div class="content">
+                          {% block content %} {%  endblock %}
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </main>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script src="{{ url_for('static', filename='js/javascript.js') }}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
