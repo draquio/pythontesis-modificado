@@ -117,7 +117,6 @@ def delete(id):
     db.commit()
     
     return redirect(url_for('rol.index'))
-    #return render_template('rol/index.html', alerta="alert-success")
 
 
 # Validar solo texto

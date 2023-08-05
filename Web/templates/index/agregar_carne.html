@@ -17,7 +17,7 @@
     <label for="message-text" class="col-form-label">Cantidad:</label><br>
     <input type="number" min="1" step="any" class="form-control cantidad-corte-carne" id="cantidad_agregar_carne" name="cantidad" placeholder="Cantidad en kg.">
   </div>
-    <div class="form-group" id="bloque_cortes">
+    <div class="form-group bloque_agregar_carne" id="bloque_cortes" >
       <div class="bloque_carne_izquierda" id="bloque_carne_izquierda">
         <label for="message-text" class="col-form-label">Cantidad:</label><br>
         <input type="number" step="any" min="1" class="form-control cantidad-corte-carne" id="cantidad_agregar_carne" name="corte[]" placeholder="Cantidad en kg.">
@@ -30,10 +30,10 @@
         {% endfor %}
       </select>
     </div>
-      <br>
-      <a class="btn btn-verde"  onclick="agregarcampocorte()">Agregar</a>
-      <a class="btn btn-rojo"  onclick="eliminar_campos_corte()">Quitar</a>
+     
     </div>
+    <a class="btn btn-verde" onclick="agregarcampocorte()">Agregar</a>
+    <a class="btn btn-rojo" onclick="eliminar_campos_corte()">Quitar</a>
     
   
 </div>

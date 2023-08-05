@@ -1,7 +1,5 @@
 from flask import Flask, render_template, Blueprint, abort, request, flash, redirect, url_for, jsonify
 from Web.auth import  login_required, rol_no_admin
-import functools
-import requests
 from Web.db import get_db
 import datetime
 from datetime import date
@@ -16,7 +14,6 @@ bp = Blueprint('index', __name__)
 @bp.route('/')
 def index():
     return redirect(url_for('auth.login'))
-    # return render_template('index/index.html', titulo="Index")
 
 @bp.route('/historial')
 def historial():
@@ -54,7 +51,8 @@ def home():
     stats()
     statslineal()
     db, c = get_db()
-    c.execute('SELECT cantidad, tipo FROM carnes where DATE_FORMAT(date, "%Y-%m-%d") = CURDATE()')
+    # c.execute('SELECT cantidad, tipo FROM carnes where DATE_FORMAT(date, "%Y-%m-%d") = CURDATE()')
+    c.execute('SELECT cantidad, tipo, date FROM prueba.carnes order by id asc limit 10')
     carneshoy = c.fetchall()
     carnecompradahoy = sumarcarne(carneshoy, 0)
     carneocupadahoy = sumarcarne(carneshoy, 1)
@@ -62,7 +60,7 @@ def home():
         cantidad = request.form['cantidad']
         tipocarne = request.form['tipocarne']
         tipo = request.form['tipo']
-        ayer = request.form.getlist('ayer')
+        # ayer = request.form.getlist('ayer')
         c.execute('insert into carnes (idtipocarne, cantidad, date, tipo) values (%s, %s, %s, %s)', (tipocarne, cantidad, datetime.datetime.now(), tipo))
         db.commit()
         alerta = '{} kilos de carne guardada exitósamente!'.format(cantidad)
@@ -389,7 +387,6 @@ def predecircortesytipo():
                     cortes.append({"cantidad":int(cantidadconsumo), "fecha":carnecomprada['fecha'],"corte":carnecomprada['corte'], "tipo":carnecomprada['tipo']})
                 else:
                     carnes.append({"cantidad":int(cantidadconsumo), "fecha":carnecomprada['fecha'], "tipo":carnecomprada['tipo']})
-                # print("Carne comprada {} - Carne guardada {} = total: {} | corte: {} - corte2: {}".format(carnecomprada['cantidad'],carneguardada['cantidad'],total,carnecomprada['corte'],carneguardada['corte']))
                 cont=cont+1 
     resultado = jsonify({
         "cortes" : cortes,

@@ -12,14 +12,10 @@ bp = Blueprint('almacen', __name__, url_prefix='/almacen')
 @bp.route('/')
 def index():
     db, c = get_db()
-    # c.execute('select * from carnessobra where estado=0 and DATE_FORMAT(date,"%y-%m-%d") <= CURDATE() - INTERVAL 1 DAY and DATE_FORMAT(date,"%y-%m-%d") >= CURDATE() - INTERVAL 7 DAY')
-    # CarneSinRepositorio = c.fetchall()
-    # CarneSinRepositorio = mostrar_detalle_fecha(CarneSinRepositorio)
+
     almacenes_ocupados = listar_almacenes_ocupados_ultimos_15dias()
     almacenes_ocupados = mostrar_detalle_fecha(almacenes_ocupados)
     almacenes = get_almacen_QR()
-    # AgregarDiadelaSemana(CarneSinRepositorio)
-    # return render_template('almacen/index.html', titulo="Almacen", CarneSinRepositorio=CarneSinRepositorio, almacenes=almacenes, almacenes_ocupados=almacenes_ocupados)
     return render_template('almacen/index.html', titulo="Almacen", almacenes=almacenes, almacenes_ocupados=almacenes_ocupados)
 
 @bp.route('/<int:id>/update', methods=['GET', 'POST'])
@@ -124,9 +120,7 @@ def get_almacen_QR():
 def AgregarDiadelaSemana(carnes):
     nombre_dia=['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado','Domingo']
     for c in carnes:
-        # print(c['fecha'])
         fecha = datetime(c['fecha'])
-        # print(calendar.weekday(c['fecha']))
 
 def get_carnesobra(id):
     db, c = get_db()

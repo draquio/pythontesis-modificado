@@ -10,11 +10,6 @@
             <input type="text" class="form-control" id="username" value="{{ request.form['username'] or user['username'] }}" name="username" placeholder="Nombre de Usuario" required="required">
         </div>
     </br>
-        <!-- <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend"><div class="input-group-text"><i class="fa fa-lock"></i></div></div>
-            <input type="password" class="form-control" value="{{ request.form['password'] or user['password'] }}" id="password" name="password" placeholder="Contraseña" required="required">
-        </div>
-    </br> -->
     <div class="form-group">
         <label for="input-group mb-2 mr-sm-2">Selecionar Rol</label>
         <select class="form-control" name="idrol" id="idrol">

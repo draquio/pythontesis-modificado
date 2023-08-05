@@ -36,7 +36,7 @@ function seleccionarTipoCarne(){
         document.getElementById('bloque_cantidad').style.display = 'block';
     }
 }
-
+//Elimina espacios en Agregar_carne
 function eliminar_campos_corte(){
     let bloque_carne_derecha = document.getElementById('bloque_carne_derecha');
     let bloque_carne_izquierda = document.getElementById('bloque_carne_izquierda');
@@ -47,6 +47,23 @@ function eliminar_campos_corte(){
     }
     if(input_tag.length > 1){
         bloque_carne_izquierda.removeChild(input_tag[(input_tag.length) - 1]);
+    }
+}
+
+//Elimina espacios en Guardar_Carne
+function eliminar_campos_carne(){
+    let bloque_izquierda = document.getElementById('guardar_bloque_carne_izquierda');
+    let bloque_centro = document.getElementById('guardar_bloque_carne_centro');
+    let bloque_derecha = document.getElementById('guardar_bloque_carne_derecho');
+
+    var input_tag = bloque_izquierda.getElementsByTagName('input');
+    var select_tag = bloque_centro.getElementsByTagName('select');
+    var select_tag_almacen = bloque_derecha.getElementsByTagName('select');
+
+    if(select_tag.length > 1){
+        bloque_izquierda.removeChild(input_tag[(input_tag.length) - 1]);
+        bloque_centro.removeChild(select_tag[(select_tag.length) - 1]);
+        bloque_derecha.removeChild(select_tag_almacen[(select_tag_almacen.length) - 1]);
     }
 }
 

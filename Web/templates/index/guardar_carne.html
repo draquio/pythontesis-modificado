@@ -24,12 +24,12 @@
           {% endfor %}
         </select>
   </div>
-    <div class="form-group" id="bloque_cortes">
-      <div class="guardar_bloque_carne_izquierda" id="guardar_bloque_carne_izquierda">
+    <div class="form-group bloque_cortes" id="bloque_cortes">
+      <div class="guardar_bloque_carne" id="guardar_bloque_carne_izquierda">
         <label for="message-text" class="col-form-label">Cantidad:</label><br>
         <input type="number" step="any" min="1" class="form-control cantidad-corte-carne" id="cantidad_agregar_carne" name="corte[]" placeholder="Cantidad en kg.">
       </div>
-      <div class="guardar_bloque_carne_centro" id="guardar_bloque_carne_centro">
+      <div class="guardar_bloque_carne" id="guardar_bloque_carne_centro">
       <label for="message-text" class="col-form-label">Cortes:</label><br>
       <select class="form-control tipo-corte-carne" id="tipo-corte-carne"  name="corte-carne[]">
         {% for c in cortes%}
@@ -37,7 +37,7 @@
         {% endfor %}
       </select>
     </div>
-    <div class="guardar_bloque_carne_derecho" id="guardar_bloque_carne_derecho">
+    <div class="guardar_bloque_carne" id="guardar_bloque_carne_derecho">
         <label for="message-text" class="col-form-label">Almacen:</label><br>
         <select class="form-control tipo-corte-carne"  name="lista-almacen[]">
           {% for a in almacenes %}
@@ -45,10 +45,10 @@
           {% endfor %}
         </select>
     </div>
-      <br>
-      <a class="btn btn-verde"  onclick="agregarcampoguardarcarne()">Agregar</a>
-      <a class="btn btn-rojo"  onclick="eliminar_campos_corte()">Quitar</a>
+
     </div>
+    <a class="btn btn-verde"  onclick="agregarcampoguardarcarne()">Agregar</a>
+    <a class="btn btn-rojo"  onclick="eliminar_campos_carne()">Quitar</a>
     
   
 </div>

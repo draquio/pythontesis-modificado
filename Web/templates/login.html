@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<title>{% block title %} {% endblock %} - El Rodeo</title>
+<header>
+  <link rel="stylesheet" href="{{ url_for('static', filename='../static/bootstrap/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+  <script src="{{ url_for('static', filename='../static/bootstrap/jquery.slim.min.js') }}" ></script>
+  <script src="{{ url_for('static', filename='../static/bootstrap/bootstrap.min.js') }}" ></script>
+  <!----------- Fuentes  ------------->
+  <script
+    src="https://kit.fontawesome.com/d4224b7569.js"
+    crossorigin="anonymous"
+  ></script>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bottom-border">
+  <div class="container">
+    <a class="navbar-brand" href="/">El Rodeo</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar"
+      aria-controls="navbar"
+      aria-expanded="false"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <button class="switch" id="switch">
+            <span><i class="fas fa-sun"></i></span>
+            <span><i class="fas fa-moon"></i></span>
+          </button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="content">
+  <header>{% block header %} {% endblock %}</header>
+
+  <main role="main" class="container-sm">
+    <div class="row">
+      <div class="col-6 login-block">
+        <div class="border-container">
+          {% for category, message in get_flashed_messages(with_categories=True)
+          %}
+          <div
+            class="alert alert-{{category}} alert-dismissible fade show"
+            role="alert"
+          >
+            <b>{{ message }}</b>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+
+          <div id="main-box">
+            <div class="title">{{ titulo }}</div>
+            <div class="content">{% block content %} {% endblock %}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script src="{{ url_for('static', filename='js/javascript.js') }}"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>

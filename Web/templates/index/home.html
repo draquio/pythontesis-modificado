@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
@@ -14,7 +11,7 @@
     <label for="email">Carne comprada hoy</label>
     <div class="input-group mb-2 mr-sm-2">
       <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fas fa-shopping-cart"></i></div>
+        <div class="input-group-text"><i class="fas fa-store"></i></div>
       </div>
       <input type="text" disabled class="form-control" id="carnecomprada" name="carnecomprada"
         value="{{carnecompradahoy}} Kg.">
@@ -30,7 +27,7 @@
         name="carneocupado">
     </div>
   </div>
-  <div style="width: 100%; text-align: center;" class="animate__animated animate__backInLeft">
+  <div class="animate__animated animate__backInLeft menu-buttons">
     <form id="recomendacion-form" method="POST">
       <a class="btn btn-amarillo" href="historial"><i class="fas fa-check-square"></i> Historial de Carne</a>
       {% if g.user.privilegio == 1 %}
@@ -38,7 +35,7 @@
       <a href="{{ url_for('index.guardar_carne') }}" class="btn btn-rojo"><i class="fas fa-save"></i> Guardar carne</a>
       {% endif %}
   </div>
-  <div style="width: 100%; text-align: center; margin-top: 3px;" class="animate__animated animate__backInLeft">
+  <div class="animate__animated animate__backInLeft menu-buttons">
     <a href="{{ url_for('index.cortes') }}" class="btn btn-azul"><i class="fas fa-utensils"></i> Cortes de carne</a>
     <a href="{{ url_for('almacen.index') }}" class="btn btn-amarillo"><i class="fas fa-database"></i> Almacén</a>
 
@@ -48,65 +45,35 @@
   </div>
 
 
-  <div style="width: 100%; margin: 40px 0px;">
+  <div class="title_home">
     <h2 class="text-warning text-center" style="text-align: center;">Predicción para Mañana</h2>
   </div>
-  <!-- <canvas id="prediccion" width="800" height="320"></canvas> -->
-  <canvas class="animate__animated animate__backInRight" id="prediccion" style="width: 800px; height: 450px;"></canvas>
+  <canvas class="" id="prediccion"></canvas>
   <p class="cuanto-comprar">Se recomienda comprar <b><span id="comprar"></span> kilos</b> de Carne de vaca para mañana.
   </p>
   <hr class="hramarillo">
-  <div style="width: 100%; margin: 40px 0px;">
+  <div class="title_home">
     <h2 class="text-warning text-center">{% block title %} Manejo de Carnes {% endblock %}</h2>
   </div>
-  <canvas id="statslineal" width="800" height="450"></canvas>
+  <canvas id="statslineal"></canvas>
   <hr class="hrrojo">
-  <div style="width: 100%; margin: 40px 0px;">
+  <div class="title_home">
     <h2 class="text-warning text-center" style="text-align: center;">Carne comprada en la semana</h2>
   </div>
-  <canvas id="stats" width="800" height="450"></canvas>
+  <canvas id="stats"></canvas>
   <hr class="hrrojo">
-  <div style="width: 100%; margin: 40px 0px;">
+  <div class="title_home">
     <h2 class="text-warning text-center" style="text-align: center;">Recomendación</h2>
   </div>
   <div class="contenedor_recomendado" id="contenedor_recomendado">
-    <!-- <div class="bloque_recomendado">
-        <div class="bloque_recomendado_dentro bloque_1">
-            <img src="http://127.0.0.1:5000/static/img/pollo.png">
-        </div>
-        <div class="bloque_recomendado_dentro bloque_2">
-            <p class="label">Recomendado:</p>
-            <p>3 Kg.</p>
-        </div>
-    </div>
-    <div class="bloque_recomendado">
-        <div class="bloque_recomendado_dentro bloque_1">
-            <img src="http://127.0.0.1:5000/static/img/pollo.png">
-        </div>
-        <div class="bloque_recomendado_dentro bloque_2">
-            <p class="label">Recomendado:</p>
-            <p>3 Kg.</p>
-        </div>
-    </div>
-    <div class="bloque_recomendado">
-        <div class="bloque_recomendado_dentro bloque_1">
-            <img src="http://127.0.0.1:5000/static/img/pollo.png">
-        </div>
-        <div class="bloque_recomendado_dentro bloque_2">
-            <p class="label">Recomendado:</p>
-            <p>3 Kg.</p>
-        </div>
-    </div> -->
+
   </div>
-  <!-- <div style="width: 100%; margin: 40px 0px;">
-    <h2 class="text-warning text-center" style="text-align: center;">Carne comprada en la semana</h2>
-  </div>
-  <canvas id="consumo" width="800" height="450"></canvas> -->
 
 
 
 
-  <!-- Modal de recomendaciones -->
+
+
   <div class="modal fade" id="modalrecomendacion" tabindex="-1" role="dialog" aria-labelledby="modalrecomendacion"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

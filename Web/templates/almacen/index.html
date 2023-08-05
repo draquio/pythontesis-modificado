@@ -5,10 +5,7 @@
 <a class="btn-amarillo boton_derecho_superior" href="{{ url_for('almacen.create') }}"><i class="fas fa-plus"></i>
     Nuevo</a>
 {% endif %}
-<!-- <div style="width: 100%; text-align: center;">
-    <a class="btn btn-azul" href="#"><i class="fas fa-plus"></i> Registrar almacen de carne</a>
-    <a class="btn btn-verde" href="{{ url_for('almacen.create') }}"><i class="fas fa-plus"></i> Lista almacenes</a>
-  </div>    -->
+
 
 <h4 style="text-align: center;" class="animate__animated animate__bounceInRight">Almacenes creados</h4>
 <div class="lista animate__animated animate__bounceInRight" id="lista2">
@@ -71,7 +68,6 @@
         </div>
         {% if g.user.privilegio == 1 %}
         <div style="width: 10%; margin-top: -7px" class="bloque_lista_dentro bloque_4">
-            <!-- <a class="btn btn-rojo" href="#"><i class="fas fa-trash-alt"></i></a> -->
             <form action="{{ url_for('almacen.deleteAlmacenGuardado', id=a['idgeneral']) }}" method="POST">
                 <div class="form-group mt-3" style="text-align: right;">
                     <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"

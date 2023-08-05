@@ -82,7 +82,7 @@ def login():
         flash(error, "danger")
         
 
-    return render_template('auth/login.html')
+    return render_template('auth/login.html', titulo="Login")
 
 #Funcion para mostrar Roles en el registro
 def get_rol():
@@ -116,8 +116,6 @@ def rol_no_admin():
     rol = c.fetchall()
     for r in rol:
         if r['privilegio'] != 1:
-            #redirect(url_for("No eres administrador para acceder a esta página")
-            #return render_template("404.html"), 404
             abort(404, "No puedes acceder, no eres Administrador")
 
 
@@ -128,7 +126,6 @@ def load_logged_in_user():
         g.user = None
     else:
         db, c = get_db()
-        # c.execute('select * from User where id = %s', (user_id,))
         c.execute('SELECT *, r.privilegio FROM user u, rol r where u.id=%s and u.idrol=r.id', (user_id,))
         g.user = c.fetchone()
 
@@ -207,7 +204,6 @@ def updatepassword(id):
             error = 'Contraseña modificada del usuario "{}"'.format(user['username'])
             flash(error, "success")
             return redirect(url_for('auth.users'))
-            # return render_template('auth/users.html',user=user, titulo=titulo)
         else:
             flash(error, "danger")
     return render_template('auth/updatepassword.html',user=user, titulo=titulo)
@@ -252,4 +248,3 @@ def delete(id):
     db.commit()
     
     return redirect(url_for('auth.users'))
-    #return render_template('rol/index.html', alerta="alert-success")

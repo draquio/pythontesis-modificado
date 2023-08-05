@@ -190,6 +190,7 @@ $(document).ready(function () {
           },
           options: {
             responsive: true,
+            maintainAspectRatio: true,
             title: {
               display: true,
               text: 'Carne ocupada en los últimos 7 días',
