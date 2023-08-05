@@ -20,7 +20,8 @@ def historial():
     db, c = get_db()
     carnecomprada = []
     carneguardada = []
-    c.execute('SELECT c.id, t.nombre, c.cantidad, c.date, c.tipo, c.idcortecarne, c.idtipocarne FROM carnes c, tipocarne t where DATE_FORMAT(date,"%y-%m-%d") = CURDATE() and t.id=c.idtipocarne')
+    # c.execute('SELECT c.id, t.nombre, c.cantidad, c.date, c.tipo, c.idcortecarne, c.idtipocarne FROM carnes c, tipocarne t where DATE_FORMAT(date,"%y-%m-%d") = CURDATE() and t.id=c.idtipocarne')
+    c.execute('SELECT c.id, t.nombre, c.cantidad, c.date, c.tipo, c.idcortecarne, c.idtipocarne FROM carnes c, tipocarne t where t.id=c.idtipocarne  order by date desc limit 7')
     carnehistorial = c.fetchall()
     carnehistorial = carnehistorial[::-1]
     carnehistorial = llenar_espacio_corte_carne(carnehistorial)

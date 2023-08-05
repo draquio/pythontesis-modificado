@@ -67,22 +67,6 @@ function eliminar_campos_carne(){
     }
 }
 
-// Multiples inserciones
-// function CargarCarneArreglo() {
-//     var arregloCarnes = new Array();
-//     var arregloTipo = new Array();
-//     var valoresInputs = document.getElementsByClassName('cantidad-corte-carne');
-//     var valoresTipos = document.getElementsByClassName('tipo-corte-carne');
-//     nombreValores = [].map.call(valoresInputs,function(data){
-//       arregloCarnes.push(data.value);
-//     });
-//     valorTipo = [].map.call(valoresTipos,function(data){
-//         arregloTipo.push(data.value);
-//     });
-//     console.log(arregloTipo);
-//   }
-
-
 
 // ------------- Funciones Guardar Carne ----------------
 function agregarcampoguardarcarne() {

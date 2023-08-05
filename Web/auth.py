@@ -43,15 +43,14 @@ def register():
         elif c.fetchone() is not None:
             error = "Usuario {} se encuentra registrado.".format(username)
         if error is None:
-            c.execute(
-                'insert into User (username, idrol, password) values (%s, %s, %s)',
-                (username, idrol, generate_password_hash(password))
-            )
-            db.commit()
-            error = 'Usuario "{0}" creado'.format(username)
+            # c.execute(
+            #     'insert into User (username, idrol, password) values (%s, %s, %s)',
+            #     (username, idrol, generate_password_hash(password))
+            # )
+            # db.commit()
+            error = 'Usuario "{0}" creado / Desactivado'.format(username)
             flash(error, "success")
             return redirect(url_for('auth.users'))
-            #return redirect(url_for('auth.register'))
 
         flash(error, "danger")
     return render_template('auth/register.html', titulo="Registro de Usuarios", roles=roles)
@@ -167,12 +166,12 @@ def update(id):
         if error is not None:
             flash(error, "danger")
         else:
-            db, c = get_db()
-            c.execute(
-                'update user set username = %s, idrol = %s where id = %s', (username, idrol, id)
-            )
-            db.commit()
-            error = "Usuario modificado."
+            # db, c = get_db()
+            # c.execute(
+            #     'update user set username = %s, idrol = %s where id = %s', (username, idrol, id)
+            # )
+            # db.commit()
+            error = "Usuario modificado. / Desactivado"
             flash(error, "success")
             return redirect(url_for('auth.users'))
     return render_template('auth/update.html', user=user, roles=roles, titulo=titulo)
@@ -195,13 +194,12 @@ def updatepassword(id):
         elif nuevopassword != repetirpassword:
             error = "Debe repetir la nueva contraseña"
         if error is None:
-            db, c = get_db()
-            print("entra hasta antes de guardar")
-            c.execute(
-                'update user set password = %s where id = %s', (generate_password_hash(nuevopassword), id)
-            )
-            db.commit()
-            error = 'Contraseña modificada del usuario "{}"'.format(user['username'])
+            # db, c = get_db()
+            # c.execute(
+            #     'update user set password = %s where id = %s', (generate_password_hash(nuevopassword), id)
+            # )
+            # db.commit()
+            error = 'Contraseña modificada del usuario "{}" / Desactivado'.format(user['username'])
             flash(error, "success")
             return redirect(url_for('auth.users'))
         else:
@@ -239,8 +237,8 @@ def delete(id):
     if id != 1:
         c.execute('select username from User where id = %s', (id,))
         usuario = c.fetchone()
-        c.execute('delete from user where id = %s', (id,))
-        error = 'Usuario "{}" eliminado.'.format(usuario['username'])
+        # c.execute('delete from user where id = %s', (id,))
+        error = 'Usuario "{}" eliminado. / Desactivado'.format(usuario['username'])
         flash(error, "success")
     else:
         error = "Usuario Administrador no se puede eliminar."

@@ -37,12 +37,12 @@ def create():
         if error is not None:
             flash(error, "danger")
         else:
-            db, c = get_db()
-            c.execute(
-                'insert into rol (nombrerol, descripcion, privilegio) values (%s, %s, %s)', (nombrerol, descripcion, privilegio)
-            )
-            db.commit()
-            error = 'Rol "{0}" creado exitósamente'.format(nombrerol)
+            # db, c = get_db()
+            # c.execute(
+            #     'insert into rol (nombrerol, descripcion, privilegio) values (%s, %s, %s)', (nombrerol, descripcion, privilegio)
+            # )
+            # db.commit()
+            error = 'Rol "{0}" creado exitósamente / Desactivado'.format(nombrerol)
             flash(error, "success")
             return redirect(url_for('rol.index'))
             
@@ -83,12 +83,12 @@ def update(id):
         if error is not None:
             flash(error, "danger")
         else:
-            db, c = get_db()
-            c.execute(
-                'update rol set nombrerol = %s, descripcion = %s, privilegio = %s where id = %s', (nombrerol, descripcion, privilegio, id)
-            )
-            db.commit()
-            error = "Rol modificado."
+            # db, c = get_db()
+            # c.execute(
+            #     'update rol set nombrerol = %s, descripcion = %s, privilegio = %s where id = %s', (nombrerol, descripcion, privilegio, id)
+            # )
+            # db.commit()
+            error = "Rol modificado. / Desactivado"
             flash(error, "success")
             return redirect(url_for('rol.index'))
     return render_template('rol/update.html', rol=rol, titulo="Modificar Rol")
@@ -100,13 +100,12 @@ def delete(id):
     rol_no_admin()
     db, c = get_db()
     c.execute('select count(*) as total FROM user where idrol=%s', (id,))
-    # c.execute('SELECT * FROM carnes where id=%s', (id,))
     rolocupado = c.fetchone()
     c.execute('select nombrerol from rol where id = %s', (id,))
     rol = c.fetchone()
     if rolocupado['total'] == 0:
-        c.execute('delete from rol where id = %s', (id,))
-        error = 'Rol "{}" eliminado.'.format(rol["nombrerol"])
+        # c.execute('delete from rol where id = %s', (id,))
+        error = 'Rol "{}" eliminado. / Desactivado'.format(rol["nombrerol"])
         flash(error, "success")
     else:
         if rolocupado['total'] >= 2:

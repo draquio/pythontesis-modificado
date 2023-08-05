@@ -29,8 +29,14 @@
         <div class="form-group mt-3" style="text-align: right;">
             <form action="{{ url_for('auth.updatepassword', id=user['id']) }}" method="POST">
                 <a href="{{ url_for('auth.updatepassword', id=user['id']) }}" class="btn btn-verde"><i class="fas fa-key"></i> Modificar contraseña</a>
-                <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"
-                        class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar usuario</button>
+                <!-- <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"
+                        class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar usuario</button> -->
+            </form>
+            <form action="{{ url_for('auth.delete', id=user['id']) }}" method="POST">
+                <div class="form-group mt-3" style="text-align: right;">
+                    <button type="submit" onclick="return confirm('Estas seguro de querer eliminar')"
+                        class="btn btn-rojo texto-blanco"><i class="far fa-trash-alt"></i> Eliminar Usuario</button>
+                </div>
             </form>
         </div>
         
