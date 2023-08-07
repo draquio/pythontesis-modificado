@@ -4,14 +4,11 @@ def create_app():
     app = Flask(__name__)
     app.config.from_mapping(
         SECRET_KEY='millave',
-        # DATABASE_HOST=os.environ.get('FLASK_DATABASE_HOST'),
-        # DATABASE_PASSWORD=os.environ.get('FLASK_DATABASE_PASSWORD'),
-        # DATABASE_USER=os.environ.get('FLASK_DATABASE_USER'),
-        # DATABASE=os.environ.get('FLASK_DATABASE'),
-        DATABASE_HOST='localhost',
-        DATABASE_PASSWORD='Sernep15@',
-        DATABASE_USER='sergio',
-        DATABASE='prueba',
+        DATABASE_HOST=os.environ.get('FLASK_DATABASE_HOST'),
+        DATABASE_PASSWORD=os.environ.get('FLASK_DATABASE_PASSWORD'),
+        DATABASE_USER=os.environ.get('FLASK_DATABASE_USER'),
+        DATABASE=os.environ.get('FLASK_DATABASE'),
+        DATABASE_PORT=os.environ.get('FLASK_DATABASE_PORT'),
     )
 
     from . import db
